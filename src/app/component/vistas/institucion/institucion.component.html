@@ -1,0 +1,46 @@
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <h4 class="text-center"><i class="fas fa-university"></i> Institucion</h4>
+        <div class="card-body">
+          <p class="text-justify">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, 
+              non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua 
+              put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore 
+              wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer 
+              farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+          <h4 class="text-center"><i class="fas fa-map-marked-alt"></i> Localizacion</h4>
+        <div class="card-body">
+          <p class="text-justify">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, 
+              non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+          </p>
+        </div>
+        <div class="card-footer text-muted">
+          <p class="text-justify">
+              Ubicacion: Venezuela, Estado Monagas, Caripito La Sabana<br>
+              Correo: EscuelaSimonRodriguez77@gmail.com <br>
+              Correo2: EscuelaSimonRodriguez77@hotmail.com <br>
+              Telefono: 0191- 5555-55-55 <br>
+              Telefono: 0412- 5555-55-55 <br>
+              Telefono: 0416- 5555-55-55 
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <agm-map [latitude]="lat" [longitude]="lon" >
+        <agm-marker [latitude]="lat" [longitude]="lon"></agm-marker>
+      </agm-map>
+    </div>
+  </div>
+</div>

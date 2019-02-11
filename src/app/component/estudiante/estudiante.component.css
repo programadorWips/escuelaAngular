@@ -1,0 +1,19 @@
+.img-perfil{
+    border-radius: 100%;
+    border: #021b13a2 solid 3px;
+    height: 500px;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+.tituloCollapse{
+    background: #051320;
+}

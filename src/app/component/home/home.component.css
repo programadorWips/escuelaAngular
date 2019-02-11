@@ -1,0 +1,30 @@
+.micontenedor2{
+    background: #293352;
+    padding-bottom: 2.5em;
+    padding-top: 1em;
+}
+
+.micontenedor1{
+    padding-bottom: 2.5em;
+}
+
+.titulonoticia{
+    color : #f1f1f1;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+}
+
+.card{
+    border-top : double #440b09 7px;
+}
+
+.micontenedor3{
+    background: #c7a020;
+    padding-bottom: 2.5em;
+    padding-top: 1em;
+}
+
+.miVideo{
+    height: 400px;
+    width: 100%;
+}

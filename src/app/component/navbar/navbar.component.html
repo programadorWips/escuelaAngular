@@ -1,0 +1,71 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+      <img src="../../../assets/img/logoPortada.jpg" class="img-fluid float-right logo" alt="Simon Rodriguez">
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" >Simon. R.</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/home"> Inicio <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Ayuda</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="vistas/institucion"><i class="fas fa-globe-americas"></i> Localizacion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="vistas/reglamentos"><i class="fas fa-gavel"></i> Reglamento</a>
+      </li>
+      <li *ngIf="!logado; else noLogado" class="nav-item" id="loginM">
+                  <!-- Button trigger modal -->
+        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter">
+          <i class="fas fa-user-lock"></i> login
+        </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form >
+                      <div class="form-group">
+                        <label for="usuario" class="col-form-label">Usuario:</label>
+                        <input type="text" class="form-control" id="usuario" name="usuario" [(ngModel)]="usuario" placeholder="V-23994567">
+                      </div>
+                      <div class="form-group">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" placeholder="1234">
+                      </div>
+
+                      <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" (click)="formLogin()" >Login</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      </li>
+      <ng-template #noLogado>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="{{myUser.cargo}}"><i class="fas fa-user-astronaut"></i>{{myUser.nombres}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/" (click)="logout()"><i class="far fa-arrow-alt-circle-left"></i> LogOut</a>
+          </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>

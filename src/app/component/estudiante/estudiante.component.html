@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+  
+              <div class="col-md-5">
+                <img src="{{myUser.urlImg}}" class="img-fluid img-perfil" alt="perfil">
+                <p class="text-center">{{myUser.cargo}}</p>
+              </div>
+              <div class="col-md-7">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h4 class="text-center">Informacion del Estudiante</h4>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Nombre y Apellido: </label> <br>
+                        <label>Cedula: </label> <br>
+                        <label>Edad: </label> <br>
+                        <label>Telefono: </label> <br>
+                        <label>Grado Actual: </label> <br>
+                        <label>Direccion: </label>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label>{{myUser.nombres}}</label> <br>
+                        <label>{{myUser.cedula}}</label> <br>
+                        <label>{{myUser.edad}}</label> <br>
+                        <label>{{myUser.telefono}}</label> <br>
+                        <label>{{myUser.grado}}</label> <br>
+                        <label>{{myUser.direccion}}</label> <br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <p>
+                    <button class="btn btn-dark btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      Mis Notas
+                    </button>
+                  </p>
+                  <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                      <table class="table">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Alumno</th>
+                              <th scope="col">Grado</th>
+                              <th scope="col">Profesor</th>
+                              <th scope="col">Materia</th>
+                              <th scope="col">Nota</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let alumno of estudiantes; index as i">
+                              <td>{{alumno.nombreEstudiante}}</td>
+                              <td>{{alumno.grado}}</td>
+                              <td>{{alumno.nombreProfesor}}</td>
+                              <td>{{alumno.materia}}</td>
+                              <td>{{alumno.nota}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

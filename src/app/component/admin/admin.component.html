@@ -1,0 +1,287 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <!--  Prepera seccion del card  -->
+          <div class="row">
+            <div class="col-md-4">
+              <img src="{{myUser.urlImg}}" class="img-fluid img-perfil" alt="perfil">
+              <p class="text-center">{{myUser.cargo}}</p>
+              <p class="text-center">Empleado: {{myUser.nombres}}</p>
+            </div>
+            <!--  ---------------------  -->
+            <!--  Segunda seccion del card  -->
+            <div class="col-md-4">
+              <h4 class="text-center">Inscripcion de Personal o Estudiante</h4>
+                <form class="example-form">
+
+                  <input type="hidden" name="id" id="id" [(ngModel)]="addUser.id">
+                  <input type="hidden" [value]="urlImg | async" #imgUser>
+                  <table class="example-full-width" cellspacing="0">
+                    <tr>
+                      <td>
+                        <mat-form-field class="example-full-width">
+                          <input name="nombres" id="nombres" matInput [(ngModel)]="addUser.nombres" placeholder="Nombres" required>
+                        </mat-form-field>
+                      </td>
+                      <td>
+                        <mat-form-field class="example-full-width">
+                          <input name="cedula" id="cedula" matInput placeholder="Cedula" [(ngModel)]="addUser.cedula" required>
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <table class="example-full-width" cellspacing="0">
+                    <tr>
+                      <td>
+                        <mat-form-field class="example-full-width">
+                          <input name="password1" id="password1" type="password" matInput [(ngModel)]="addUser.password" placeholder="Password" required>
+                        </mat-form-field>
+                      </td>
+                      <td>
+                        <mat-form-field class="example-full-width">
+                          <input name="password2" id="password2" type="password" matInput placeholder="Repita Password" required>
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                  </table>
+                  <p>
+                    <mat-form-field class="example-full-width">
+                      <textarea name="direccion" id="direccion" matInput [(ngModel)]="addUser.direccion" placeholder="Direccion:" required></textarea>
+                    </mat-form-field>
+                  </p>
+
+                  <mat-form-field class="example-full-width">
+                    <span matPrefix>+1 &nbsp;</span>
+                      <input type="tel" name="telefono" id="telefono" matInput [(ngModel)]="addUser.telefono" placeholder="Telefono:" required>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width">
+                    <input type="number" min="1" max="80" name="edad" id="edad" matInput [(ngModel)]="addUser.edad" placeholder="Edad:" required>
+                  </mat-form-field>
+                  
+                  <mat-form-field>
+                    <mat-label>Desicnar Cargo</mat-label>
+                    <mat-select name="cargo" id="cargo" (focusout)="selectCargo()" [(ngModel)]="addUser.cargo">
+                      <mat-option value="admin">Administrador</mat-option>
+                      <mat-option value="profesor">Profesor</mat-option>
+                      <mat-option value="estudiante">Estudiante</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field *ngIf="agregadoInfo == 1" class="example-full-width">
+                    <input type="number" name="grado" id="grado" matInput [(ngModel)]="addUser.grado" placeholder="Grado a Cursar:" required>
+                  </mat-form-field>
+
+                  <mat-form-field *ngIf="agregadoInfo == 2" class="example-full-width">
+                    <mat-label>Asingnar Materia</mat-label>
+                    <mat-select name="materia" id="materia" matInput [(ngModel)]="addUser.materia" placeholder="Asignar materia" required>
+                      <mat-option value="MATEMATICA"> MATEMATICA</mat-option>
+                      <mat-option value="BIOLOGIA">BIOLOGIA</mat-option>
+                      <mat-option value="LENGUAGE">LENGUAGE</mat-option>
+                      <mat-option value="INGLES">INGLES</mat-option>
+                      <mat-option value="GEOGRAFIA">GEOGRAFIA</mat-option>
+                      <mat-option value="EDUCACION FISICA">EDUCACION FISICA</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  
+                  <!-- Upload Imagen -->
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" accept=".jpg, .png" (change)="uploadImg($event)" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                  </div>
+                  <!-- Progress Bar -->
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadPercent | async) + '%'">
+                    </div>
+                  </div>
+                  <!-- Upload Imagen -->
+
+                  <div *ngIf="erro" class="form-group alert alert-danger">
+                    <p>No deje campos Vacios.</p>
+                  </div>
+
+                  <div class="form-group">
+                      <input type="submit" class="btn btn-dark float-right" (click)="guardarUsuarios()" value="Guardar">
+                    <input type="button" class="btn btn-primary float-right" (click)="cancelbtn()" value="Cancelar">
+                  </div>
+                </form>
+            </div>
+          <!--  -----------------------------------------------------------  -->
+            <!--  Tercera seccion del card  -->
+            <div class="col-md-4">
+              <div class="accordion" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0 tituloCollapse text-center">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Materias
+                      </button>
+                    </h2>
+                  </div>
+              
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+                        <div class="list-group">
+                          <a  class="list-group-item list-group-item-action">Matematica.</a>
+                          <a  class="list-group-item list-group-item-action">Lenguage.</a>
+                          <a  class="list-group-item list-group-item-action">Ingles.</a>
+                          <a  class="list-group-item list-group-item-action">Biologia.</a>
+                          <a  class="list-group-item list-group-item-action">Geografia.</a>
+                          <a  class="list-group-item list-group-item-action">Educacion Fisica.</a>
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0 tituloCollapse text-center">
+                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Tabla Profesores
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+
+                      <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action active text-center">
+                            <i class="fas fa-university"></i> Ver Lista de Profesores:
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action text-center" (click)="getAllProf()" data-toggle="modal" data-target="#exampleModal2">Pulse Aqui.</button>
+                      </div>
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel2">Tabla de Profesores</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="card">
+                                <div class="card-body">
+                                    <table class="table">
+                                      <thead class="thead-dark">
+                                        <tr>
+                                          <th scope="col">Profesor</th>
+                                          <th scope="col">Cedula</th>
+                                          <th scope="col">Materia</th>
+                                          <th scope="col">HMTS</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let profesor of profesores; index as i">
+                                          <td>{{profesor.nombres}}</td>
+                                          <td>{{profesor.cedula}}</td>
+                                          <td>{{profesor.materia}}</td>
+                                          <td>
+                                            <button class="btn btn-success" (click)="guardaData(profesor)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-danger" (click)="eliminaData(profesor.id)"><i class="far fa-trash-alt"></i></button>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-dark" data-dismiss="modal">Guardar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h2 class="mb-0 tituloCollapse text-center">
+                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Tabla de Estudiantes
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+
+                      <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action active text-center">
+                            <i class="fas fa-graduation-cap"></i> Elija un grado pidponible:
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action text-center" (click)="getAllEstu('1')" data-toggle="modal" data-target="#exampleModal">Alumnos de Primer Grado</button>
+                        <button type="button" class="list-group-item list-group-item-action text-center" (click)="getAllEstu('2')" data-toggle="modal" data-target="#exampleModal">Alumnos de Segundo Grado</button>
+                        <button type="button" class="list-group-item list-group-item-action text-center" (click)="getAllEstu('3')" data-toggle="modal" data-target="#exampleModal">Alumnos de Tercer Grado</button>
+                        <button type="button" class="list-group-item list-group-item-action text-center" (click)="getAllEstu('4')" data-toggle="modal" data-target="#exampleModal">Alumnos de Cuarto Grado</button>
+                        <button type="button" class="list-group-item list-group-item-action text-center" (click)="getAllEstu('5')" data-toggle="modal" data-target="#exampleModal">Alumnos de Quinto Grado</button>
+                        <button type="button" class="list-group-item list-group-item-action text-center" (click)="getAllEstu('6')" data-toggle="modal" data-target="#exampleModal">Alumnos de Sexto Grado</button>
+                      </div>
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Tabla de Estudiantes</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="card">
+                                <div class="card-body">
+                                    <table class="table">
+                                      <thead class="thead-dark">
+                                        <tr>
+                                          <th scope="col">Alumno</th>
+                                          <th scope="col">Cedula</th>
+                                          <th scope="col">Grado</th>
+                                          <th scope="col">HMTS</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let alumno of estudiantes; index as i">
+                                          <td>{{alumno.nombres}}</td>
+                                          <td>{{alumno.cedula}}</td>
+                                          <td>{{alumno.grado}}</td>
+                                          <td>
+                                            <button class="btn btn-success" (click)="guardaData(alumno)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-danger" (click)="eliminaData(alumno.id)"><i class="far fa-trash-alt"></i></button>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-dark" data-dismiss="modal">Guardar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -----------------------------  -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
