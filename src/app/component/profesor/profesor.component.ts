@@ -16,36 +16,44 @@ export class ProfesorComponent implements OnInit {
   public estudiantes : UserInterface[];
 
   public misNotas : NotaInterface = {};
+  public comprobacionDeNotas : NotaInterface = {};
   public allNotasMateria : NotaInterface[];
+
 
   constructor(private userServ: LoginService, private notaServ: MateriasService) { }
 
   guardarNotas(){
 
     console.log(this.estudInfo.id);
-    if(this.estudInfo.id == null){
+
+    this.misNotas.nombreEstudiante = this.estudInfo.nombres;
+    this.misNotas.cedulaEstudiante = this.estudInfo.cedula;
+    this.misNotas.grado = this.estudInfo.grado;
+    this.misNotas.nombreProfesor = this.myUser.nombres;
+    this.misNotas.cedulaProfesor = this.myUser.cedula;
+    this.misNotas.materia = this.myUser.materia;
+
+    this.getNotaVerificada(this.misNotas.cedulaEstudiante, this.misNotas.grado,this.misNotas.materia).subscribe(data =>{
+        
+      if(data[0]){
+        console.log(data[0]);
+        this.comprobacionDeNotas = data[0];
+
+        this.misNotas.id = this.comprobacionDeNotas.id;
+
+        this.notaServ.updateNotas(this.misNotas);
+        this.estudInfo = {};
+      }
+      else{
+
+        if(this.estudInfo.id == null){
+
+          this.notaServ.addNotas(this.misNotas);
+        }
+        this.comprobacionDeNotas = {};
+      }
+    });
     
-      this.misNotas.nombreEstudiante = this.estudInfo.nombres;
-      this.misNotas.cedulaEstudiante = this.estudInfo.cedula;
-      this.misNotas.grado = this.estudInfo.grado;
-      this.misNotas.nombreProfesor = this.myUser.nombres;
-      this.misNotas.cedulaProfesor = this.myUser.cedula;
-      this.misNotas.materia = this.myUser.materia;
-
-      this.notaServ.addNotas(this.misNotas);
-    }
-    else{
-
-      this.misNotas.id = this.estudInfo.id;
-      this.misNotas.nombreEstudiante = this.estudInfo.nombres;
-      this.misNotas.cedulaEstudiante = this.estudInfo.cedula;
-      this.misNotas.grado = this.estudInfo.grado;
-      this.misNotas.nombreProfesor = this.myUser.nombres;
-      this.misNotas.cedulaProfesor = this.myUser.cedula;
-      this.misNotas.materia = this.myUser.materia;
-
-      this.notaServ.updateNotas(this.misNotas);
-    }
 
   }
 
@@ -77,6 +85,14 @@ export class ProfesorComponent implements OnInit {
         this.allNotasMateria = data;
       }
     });
+  }
+
+  getNotaVerificada(cedula: string, grado: string, materia: string){
+    return this.notaServ.getNotasEstudiante(cedula,grado,materia);
+  }
+
+  resetAll(){
+    this.estudInfo = {};
   }
 
   guardaDataNota(notasUpdate : NotaInterface){

@@ -17,7 +17,7 @@ export class EstudianteComponent implements OnInit {
   constructor(private userServ: LoginService, private NotaServ: MateriasService) { }
 
   getAllEstu(){
-    this.NotaServ.getNotasEstudiante(this.myUser.cedula).subscribe(data =>{
+    this.NotaServ.getNotasEstudianteE(this.myUser.cedula).subscribe(data =>{
       if(data){
         console.log(data);
         this.estudiantes = data;

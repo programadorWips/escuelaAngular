@@ -36,9 +36,23 @@ export class MateriasService {
     }));
   }
 
-public getNotasEstudiante(cedula: string){
+  public getNotasEstudianteE(cedula: string){
 
-  this.notasCollection = this.fireDB.collection<NotaInterface>("notas", ref => ref.where('cedulaEstudiante', '==', cedula)); 
+    this.notasCollection = this.fireDB.collection<NotaInterface>("notas", ref => ref.where('cedulaEstudiante', '==', cedula)); 
+    this.notas = this.notasCollection.valueChanges();
+  
+    return this.notas = this.notasCollection.snapshotChanges().pipe(map(changes =>{
+      return changes.map(action => {
+        const data = action.payload.doc.data() as NotaInterface;
+        data.id = action.payload.doc.id;
+        return data;
+      });
+    }));
+  }
+
+public getNotasEstudiante(cedula: string, grado : string, materia : string){
+
+  this.notasCollection = this.fireDB.collection<NotaInterface>("notas", ref => ref.where('cedulaEstudiante', '==', cedula).where('grado', '==', grado).where('materia', '==', materia)); 
   this.notas = this.notasCollection.valueChanges();
 
   return this.notas = this.notasCollection.snapshotChanges().pipe(map(changes =>{
